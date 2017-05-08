@@ -1,0 +1,6 @@
+# Basically, it is not that different from the previous one, it just uses a base image that embeds alpine and a Node.js runtime so we do not have to install it ourself
+
+FROM mhart/alpine-node:6.9.4
+COPY . /app
+WORKDIR /app
+CMD ["node","index.js"]

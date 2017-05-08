@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.cloudbees.hudson.plugins.folder.Folder plugin="cloudbees-folder@5.2.2">
+  <actions/>
+  <description></description>
+  <properties>
+    <com.cloudbees.jenkins.plugins.foldersplus.SecurityGrantsFolderProperty plugin="cloudbees-folders-plus@3.0">
+      <securityGrants/>
+    </com.cloudbees.jenkins.plugins.foldersplus.SecurityGrantsFolderProperty>
+    <com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty>
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain plugin="credentials@1.25">
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList/>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty>
+    <com.cloudbees.hudson.plugins.folder.properties.EnvVarsFolderProperty plugin="cloudbees-folders-plus@3.0">
+      <properties></properties>
+    </com.cloudbees.hudson.plugins.folder.properties.EnvVarsFolderProperty>
+    <com.cloudbees.hudson.plugins.folder.properties.SubItemFilterProperty plugin="cloudbees-folders-plus@3.0"/>
+    <com.cloudbees.hudson.plugins.folder.properties.FolderProxyGroupContainer plugin="nectar-rbac@5.6">
+      <groups>
+        <nectar.plugins.rbac.groups.Group>
+          <name>list_viewers</name>
+          <member>user1</member>
+          <role>views</role>
+        </nectar.plugins.rbac.groups.Group>
+      </groups>
+    </com.cloudbees.hudson.plugins.folder.properties.FolderProxyGroupContainer>
+  </properties>
+  <views>
+    <hudson.model.AllView>
+      <owner class="com.cloudbees.hudson.plugins.folder.Folder" reference="../../.."/>
+      <name>All</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+    </hudson.model.AllView>
+    <hudson.model.ListView>
+      <owner class="com.cloudbees.hudson.plugins.folder.Folder" reference="../../.."/>
+      <name>list1</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>freestyle1</string>
+        <string>freestyle2</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <com.cloudbees.plugins.deployer.DeployNowColumn plugin="deployer-framework@1.1"/>
+        <jenkins.plugins.deployedoncolumn.DeployedOnColumn plugin="deployed-on-column@1.7"/>
+      </columns>
+      <recurse>false</recurse>
+    </hudson.model.ListView>
+    <hudson.model.ListView>
+      <owner class="com.cloudbees.hudson.plugins.folder.Folder" reference="../../.."/>
+      <name>list2</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.model.ListView/jobNames/comparator"/>
+        <string>freestyle3</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <com.cloudbees.plugins.deployer.DeployNowColumn plugin="deployer-framework@1.1"/>
+        <jenkins.plugins.deployedoncolumn.DeployedOnColumn plugin="deployed-on-column@1.7"/>
+      </columns>
+      <recurse>false</recurse>
+    </hudson.model.ListView>
+  </views>
+  <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
+  <primaryView>All</primaryView>
+  <healthMetrics>
+    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric/>
+    <com.cloudbees.hudson.plugins.folder.health.AverageChildHealthMetric plugin="cloudbees-folders-plus@3.0"/>
+    <com.cloudbees.hudson.plugins.folder.health.JobStatusHealthMetric plugin="cloudbees-folders-plus@3.0">
+      <success>true</success>
+      <failure>true</failure>
+      <unstable>true</unstable>
+      <unbuilt>true</unbuilt>
+      <countVirginJobs>false</countVirginJobs>
+    </com.cloudbees.hudson.plugins.folder.health.JobStatusHealthMetric>
+    <com.cloudbees.hudson.plugins.folder.health.ProjectEnabledHealthMetric plugin="cloudbees-folders-plus@3.0"/>
+  </healthMetrics>
+  <icon class="com.cloudbees.hudson.plugins.folder.icons.StockFolderIcon"/>
+</com.cloudbees.hudson.plugins.folder.Folder>

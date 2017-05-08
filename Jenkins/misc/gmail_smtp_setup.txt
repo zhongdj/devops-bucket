@@ -1,0 +1,8 @@
+# Once you set up this on the $JENKINS_URL/configure and after validating it, you will receive a mail in myuser@gmail.com to allow this account to be managed from third party applications.
+SMTP server: smtp.gmail.com
+USE STMP Authentication: (enabled)
+Use SSL: (enabled)
+SMTP Port: 465
+Charset: UTF-8
+Username: myuser@gmail.com
+Password: *******

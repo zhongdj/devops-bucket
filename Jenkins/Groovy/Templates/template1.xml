@@ -1,0 +1,193 @@
+<job-template>
+    <actions/>
+    <description>
+    </description>
+    <attributes>
+        <template-attribute>
+            <name>name</name>
+            <displayName>Name</displayName>
+            <control class="com.cloudbees.hudson.plugins.modeling.controls.TextFieldControl"/>
+        </template-attribute>
+        <template-attribute>
+            <name>SVN_URL</name>
+            <displayName>SVN</displayName>
+            <control class="com.cloudbees.hudson.plugins.modeling.controls.TextFieldControl"/>
+        </template-attribute>
+        <template-attribute>
+            <name>Deploy_to_WebLogic</name>
+            <displayName>Deploy to WebLogic</displayName>
+            <control class="com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl">
+                <options>
+                    <com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl_-Option>
+                        <displayName>Yes</displayName>
+                        <value>Yes</value>
+                        <inlineHelp/>
+                    </com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl_-Option>
+                    <com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl_-Option>
+                        <displayName>Skip</displayName>
+                        <value>Skip</value>
+                        <inlineHelp/>
+                    </com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl_-Option>
+                </options>
+                <mode>DROPDOWN_LIST</mode>
+            </control>
+        </template-attribute>
+        <template-attribute>
+            <name>Release_to_Artifactory</name>
+            <displayName>Release to Artifactory</displayName>
+            <control class="com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl">
+                <options>
+                    <com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl_-Option>
+                        <displayName>Yes</displayName>
+                        <value>Yes</value>
+                        <inlineHelp/>
+                    </com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl_-Option>
+                    <com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl_-Option>
+                        <displayName>Skip</displayName>
+                        <value>Skip</value>
+                        <inlineHelp/>
+                    </com.cloudbees.hudson.plugins.modeling.controls.ChoiceControl_-Option>
+                </options>
+                <mode>DROPDOWN_LIST</mode>
+            </control>
+        </template-attribute>
+    </attributes>
+    <properties/>
+    <instantiable>true</instantiable>
+    <transformer class="com.cloudbees.hudson.plugins.modeling.transformer.GroovyTemplateModelTransformer">
+        <template>
+            <?xml version='1.0' encoding='UTF-8'?>
+            <project>
+                <actions/>
+                <description>Service is based on JAX_WS Dev Build and Deployment Ear type</description>
+                <keepDependencies>false</keepDependencies>
+                <properties>
+                    <com.cloudbees.plugins.deployer.DeployNowJobProperty>
+                        <oneClickDeploy>false</oneClickDeploy>
+                        <hosts>
+                            <com.cloudbees.plugins.deployer.impl.amazon.HostImpl>
+                                <targets class="java.util.Collections\$UnmodifiableRandomAccessList" resolves-to="java.util.Collections\$UnmodifiableList">
+                                    <c class="list"/>
+                                    <list reference="../c"/>
+                                </targets>
+                                <credentialsId>aws-read-only-key-declared-on-ops-center</credentialsId>
+                            </com.cloudbees.plugins.deployer.impl.amazon.HostImpl>
+                        </hosts>
+                    </com.cloudbees.plugins.deployer.DeployNowJobProperty>
+                    <jenkins.model.BuildDiscarderProperty>
+                        <strategy class="hudson.tasks.LogRotator">
+                            <daysToKeep>8</daysToKeep>
+                            <numToKeep>8</numToKeep>
+                            <artifactDaysToKeep>-1</artifactDaysToKeep>
+                            <artifactNumToKeep>-1</artifactNumToKeep>
+                        </strategy>
+                    </jenkins.model.BuildDiscarderProperty>
+                    <hudson.plugins.disk__usage.DiskUsageProperty/>
+                    <com.cloudbees.opscenter.analytics.reporter.items.AnalyticsJobProperty>
+                        <created>1478520240112</created>
+                    </com.cloudbees.opscenter.analytics.reporter.items.AnalyticsJobProperty>
+                </properties>
+                <scm class="hudson.scm.SubversionSCM">
+                    <locations>
+                        <hudson.scm.SubversionSCM_-ModuleLocation>
+                            <remote>$SVN_URL</remote>
+                            <credentialsId></credentialsId>
+                            <local>.</local>
+                            <depthOption>infinity</depthOption>
+                            <ignoreExternalsOption>true</ignoreExternalsOption>
+                        </hudson.scm.SubversionSCM_-ModuleLocation>
+                    </locations>
+                    <excludedRegions></excludedRegions>
+                    <includedRegions></includedRegions>
+                    <excludedUsers></excludedUsers>
+                    <excludedRevprop></excludedRevprop>
+                    <excludedCommitMessages></excludedCommitMessages>
+                    <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater"/>
+                    <ignoreDirPropChanges>false</ignoreDirPropChanges>
+                    <filterChangelog>false</filterChangelog>
+                </scm>
+                <assignedNode>shared-jnlp-cloud</assignedNode>
+                <canRoam>false</canRoam>
+                <disabled>false</disabled>
+                <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+                <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+                <triggers/>
+                <concurrentBuild>false</concurrentBuild>
+                <builders>
+                    <hudson.tasks.Maven>
+                        <targets>clean package</targets>
+                        <mavenName>M3</mavenName>
+                        <usePrivateRepository>false</usePrivateRepository>
+                        <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+                        <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+                    </hudson.tasks.Maven>
+                    <% if (Deploy_to_WebLogic=="Yes") { %>
+                        <hudson.tasks.Maven>
+                            <targets>TARGET 1</targets>
+                            <mavenName>M3</mavenName>
+                            <usePrivateRepository>false</usePrivateRepository>
+                            <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+                            <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+                        </hudson.tasks.Maven>
+                    <% } %>
+                    <% if (Release_to_Artifactory=="Yes") { %>
+                        <hudson.tasks.Maven>
+                            <targets>TARGET 2</targets>
+                            <mavenName>M3</mavenName>
+                            <usePrivateRepository>false</usePrivateRepository>
+                            <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+                            <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+                        </hudson.tasks.Maven>
+                    <% } %>
+                </builders>
+                <publishers>
+                    <hudson.plugins.emailext.ExtendedEmailPublisher>
+                        <recipientList>\$DEFAULT_RECIPIENTS</recipientList>
+                        <configuredTriggers>
+                            <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+                                <email>
+                                    <subject>\$PROJECT_DEFAULT_SUBJECT</subject>
+                                    <body>\$PROJECT_DEFAULT_CONTENT</body>
+                                    <recipientProviders>
+                                        <hudson.plugins.emailext.plugins.recipients.DevelopersRecipientProvider/>
+                                    </recipientProviders>
+                                    <attachmentsPattern></attachmentsPattern>
+                                    <attachBuildLog>false</attachBuildLog>
+                                    <compressBuildLog>false</compressBuildLog>
+                                    <replyTo>\$PROJECT_DEFAULT_REPLYTO</replyTo>
+                                    <contentType>project</contentType>
+                                </email>
+                            </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+                        </configuredTriggers>
+                        <contentType>default</contentType>
+                        <defaultSubject>\$DEFAULT_SUBJECT</defaultSubject>
+                        <defaultContent>\$DEFAULT_CONTENT</defaultContent>
+                        <attachmentsPattern></attachmentsPattern>
+                        <presendScript>\$DEFAULT_PRESEND_SCRIPT</presendScript>
+                        <postsendScript>\$DEFAULT_POSTSEND_SCRIPT</postsendScript>
+                        <attachBuildLog>false</attachBuildLog>
+                        <compressBuildLog>false</compressBuildLog>
+                        <replyTo>\$DEFAULT_REPLYTO</replyTo>
+                        <saveOutput>false</saveOutput>
+                        <disabled>false</disabled>
+                    </hudson.plugins.emailext.ExtendedEmailPublisher>
+                    <hudson.plugins.ws__cleanup.WsCleanup>
+                        <patterns class="empty-list"/>
+                        <deleteDirs>false</deleteDirs>
+                        <skipWhenFailed>false</skipWhenFailed>
+                        <cleanWhenSuccess>true</cleanWhenSuccess>
+                        <cleanWhenUnstable>true</cleanWhenUnstable>
+                        <cleanWhenFailure>true</cleanWhenFailure>
+                        <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+                        <cleanWhenAborted>true</cleanWhenAborted>
+                        <notFailBuild>false</notFailBuild>
+                        <cleanupMatrixParent>false</cleanupMatrixParent>
+                        <externalDelete></externalDelete>
+                    </hudson.plugins.ws__cleanup.WsCleanup>
+                </publishers>
+                <buildWrappers/>
+            </project>
+        </template>
+        <sandbox>false</sandbox>
+    </transformer>
+</job-template>
