@@ -56,6 +56,60 @@ e/_data",
 e/_data
 ```
 
+### Volumen API command
+
+Since Docker 1.9
+
+Mount folder for a container. OST_PATH and CONTAINER_PATH can be a folder or file. HOST_PATH must exist before running this command.
+
+```sh
+> docker volume --help
+Usage:  docker volume COMMAND
+
+Manage volumes
+
+Options:
+      --help   Print usage
+
+Commands:
+  create      Create a volume
+  inspect     Display detailed information on one or more volumes
+  ls          List volumes
+  prune       Remove all unused volumes
+  rm          Remove one or more volumes
+
+Run 'docker volume COMMAND --help' for more information on a command.
+```
+
+Bind-mounting is very useful in development as it enables, for instance, to share source code on the host with the container. For instance, take the /foo folder in the host OS and make it available in the Docker container at /bar. This way, you can use all the text editors, IDEs, and other tools you already have installed to make changes in /foo and you’ll see them reflected immediately in the Docker container in /bar
+
+```sh
+# docker container run -v HOST_PATH:CONTAINER_PATH [OPTIONS] IMAGE [CMD]
+> docker run -v /foo:/bar brikis98/my-rails-app
+```
+
+Create a volume and mount it for a container
+```sh
+# 1 - Create volumen
+> docker volume create --name html
+html
+# 2 - Inspect the volumen. Mountpoint defined here is the path on the Docker host where the volume can be accessed, using the name but not the ID
+> docker volume inspect html
+[
+    {
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/graph/volumes/html/_data",
+        "Name": "html",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+# 3 - Mount html it on /usr/share/nginx/html of a container. We will use a Nginx and  /usr/share/nginx/html is the default folder served
+> docker container run --name www -d -p 8080:80 -v html:/usr/share/nginx/html nginx
+```
+
+
 ### Container API commands
 
 #### Explore them
@@ -108,12 +162,6 @@ Start running a container in background mode and then, jump into the running con
 9f5c4c4045321a20b24d9a9cd932de4d0e93bb7b033f1e6214b9af14ee3b2c17
 # 2 - docker container exec -ti <CONTAINER_ID>/<CONTAINER_NAME> bash
 >  docker container exec -ti mongo bash
-```
-
-Take the /foo folder in the host OS and make it available in the Docker container at /bar. This way, you can use all the text editors, IDEs, and other tools you already have installed to make changes in /foo and you’ll see them reflected immediately in the Docker container in /bar
-
-```sh
-> docker run -v /foo:/bar brikis98/my-rails-app
 ```
 
 You can also run a second container (in the same machine) at the same time from the same image, specifying a different custom host port 

@@ -54,3 +54,5 @@ com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(com.clou
 ```java
 println(ExtensionList.lookup(com.cloudbees.plugins.credentials.CredentialsProvider.class))
 ```
+
+TcpSlaveAgentListener.CLI_HOST_NAME="<cjoc-ip-address>"

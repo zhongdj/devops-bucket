@@ -4,5 +4,12 @@
 //----------------------------------------------------
 // F.i. -Dhudson.Util.symlinkEscapeHatch=true to false
 
+```
 System.setProperty("hudson.Util.symlinkEscapeHatch","false")
 System.setProperty("com.cloudbees.workflow.rest.external.ChangeSetExt.resolveCommitAuthors", "false")
+```
+
+Other way of updating system properties
+```
+TcpSlaveAgentListener.CLI_HOST_NAME="<cjoc-ip-address>"
+```

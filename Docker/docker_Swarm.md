@@ -8,7 +8,31 @@ A stack is a group of service that are deployed together. The docker-stack.yml i
 
 Create a Docker Swarm first > Copy the join command (watch out for newlines) and paste it in the other terminal. > Deploy the stack
 
-### Operation
+### API Commands
+
+List commands 
+```sh
+> docker swarm --help
+
+Usage:  docker swarm COMMAND
+
+Manage Swarm
+
+Options:
+      --help   Print usage
+
+Commands:
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  leave       Leave the swarm
+  unlock      Unlock swarm
+  unlock-key  Manage the unlock key
+  update      Update the swarm
+
+Run 'docker swarm COMMAND --help' for more information on a command.
+```
+
 
 create a Docker Swarm first
 
@@ -31,7 +55,7 @@ Adding new node (machines) to the swarm created above
 10.0.60.3:2377
 ```
 
-From Swarm manager check the number of nodes in the swarm (running this command from the second terminal worker will fail as swarm related commands need to be issued against a swarm manager).
+From Swarm manager/leader check the number of nodes in the swarm (running this command from the second terminal worker will fail as swarm related commands need to be issued against a swarm manager).
 
 ```sh
 > docker node ls
@@ -40,7 +64,7 @@ ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
 9d1dixqcq2u5aucvpfkvynb2s *  node1     Ready   Active        Leader
 ```
 
-From Swarm manager, deploy a stack
+From Swarm manager/leader, deploy a stack
 
 ```sh
 > docker stack deploy --compose-file=docker-stack.yml voting_stack
