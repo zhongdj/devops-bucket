@@ -251,6 +251,11 @@ Getting just network
 80/tcp -> 0.0.0.0:32773
 ```
 
+Copy file from Containers > Host 
+```sh
+# docker cp <containerId>:/file/path/within/container /host/path/target
+> docker cp my-apache-app:usr/local/apache2/conf/httpd.conf .
+```
 
 ##### Cleaning Containers
 

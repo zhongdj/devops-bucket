@@ -1,14 +1,16 @@
+## Docker Swarm Mode
+
 ## Docker Swarm
 
 Docker Engine 1.12 includes swarm mode for natively managing a cluster of Docker Engines called a swarm. Use the Docker CLI to create a swarm, deploy application services to a swarm, and manage swarm behavior.
 
 A stack is a group of service that are deployed together. The docker-stack.yml in the current folder will be used to deploy the voting app as a stack.
 
-### Workflow
+Since Docker 1.13.1 and compose 1.11.1 : Start securing your swarm services using the latest compose reference that allows to specify secrets in your application stack
 
-Create a Docker Swarm first > Copy the join command (watch out for newlines) and paste it in the other terminal. > Deploy the stack
+### Docker Swarm
 
-### API Commands
+Create a cluster of Dockers.
 
 List commands 
 ```sh
@@ -113,4 +115,58 @@ my7jqgze7pgg  voting_stack_vote.1  dockersamples/examplevotingapp_vote:be
 fore  node1  Running        Running 56 seconds ago
 3jzgk39dyr6d  voting_stack_vote.2  dockersamples/examplevotingapp_vote:be
 fore  node2  Running        Running 58 seconds ago
+```
+
+### Docker services
+
+Operate with the services, including scaling up or down the number of replicas.
+
+List commands 
+```sh
+> docker service --help
+
+Usage:	docker service COMMAND
+
+Manage services
+
+Options:
+      --help   Print usage
+
+Commands:
+  create      Create a new service
+  inspect     Display detailed information on one or more services
+  logs        Fetch the logs of a service
+  ls          List services
+  ps          List the tasks of a service
+  rm          Remove one or more services
+  scale       Scale one or multiple replicated services
+  update      Update a service
+
+Run 'docker service COMMAND --help' for more information on a command.
+```
+## Docker node
+
+Operate with nodes individually.
+
+List commands 
+```sh
+> docker node --help
+
+Usage:	docker node COMMAND
+
+Manage Swarm nodes
+
+Options:
+      --help   Print usage
+
+Commands:
+  demote      Demote one or more nodes from manager in the swarm
+  inspect     Display detailed information on one or more nodes
+  ls          List nodes in the swarm
+  promote     Promote one or more nodes to manager in the swarm
+  ps          List tasks running on one or more nodes, defaults to current node
+  rm          Remove one or more nodes from the swarm
+  update      Update a node
+
+Run 'docker node COMMAND --help' for more information on a command.
 ```

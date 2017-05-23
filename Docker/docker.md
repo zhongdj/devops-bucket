@@ -87,3 +87,11 @@ Registry: https://index.docker.io/v1/
 Insecure Registries:
  127.0.0.0/8
 ```
+
+Enabling Docker API REST on Docker Host to connect any Remote computer
+Open the `/etc/default/docker` file, search for DOCKER_OPTS and add values
+Ref: http://scriptcrunch.com/enable-docker-remote-api/ (Note: wrong file)
+
+```sh
+DOCKER_OPTS=' [...] -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock'
+```
