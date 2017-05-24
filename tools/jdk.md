@@ -48,7 +48,7 @@ Ref: [KeyStore Tutorial][]
 
 ### Keystore description
 
-It could be a `keystore.jks` or `cacerts`
+It could be a `keystore.jks` (custom certificates of a instance) or `cacerts` (default)
 ```sh
 > keytool -list -v -keystore cacerts > /tmp/certificates.log ; atom /tmp/certificates.log
 ```
@@ -80,19 +80,12 @@ Emisor: CN=GeoTrust SSL CA - G3, O=GeoTrust Inc., C=US
 ### To test connection by using a Keystore
 
 ```sh
-> jrunscript -Djavax.net.ssl.trustStore=/Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/security/cacerts -Djavax.net.ssl.trustStorePassword=changeit -e "println(new java.net.URL(\"https://bitbucket.beescloud.com\").openConnection().getResponseCode())"
+> jrunscript -Djavax.net.ssl.trustStore=<PATH>/cacerts -Djavax.net.ssl.trustStorePassword=changeit -e "println(new java.net.URL(\"https://bitbucket.beescloud.com\").openConnection().getResponseCode())"
 
-Java.lang.RuntimeException: javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
-
-Caused by: javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
-
-... 
-
-Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
-
-... 
-	
-Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+### It does not get connected
+script error: sun.org.mozilla.javascript.internal.WrappedException: Wrapped javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target (<string>1) in <string> at line number 1
+### It gets connected, a HTTP response code
+200 
 
 ```
 

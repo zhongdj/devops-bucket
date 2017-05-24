@@ -2,6 +2,8 @@
 
 :ballot_box_with_check: [Running Docker on AWS from the ground up][]
 
+:ballot_box_with_check:[Docker Container as Build Slaves][]
+
 :arrow_forward: [Training playing with Docker][] > Defining a volume at runtime
 
 - [ ] [Deploy Jenkins in GPG][]
@@ -32,3 +34,4 @@
 [Deploy Jenkins in GPG]:https://github.com/ShoppinPal/gcp-scripts/wiki
 [Learn Chef]:https://learn.chef.io/
 [Ansible Webminar y Training]:https://www.ansible.com/webinars-training
+[Docker Container as Build Slaves]:https://devopscube.com/docker-containers-as-build-slaves-jenkins/
