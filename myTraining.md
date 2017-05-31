@@ -9,6 +9,7 @@
 - [ ] [Deploy Jenkins in GPG][]
 - [ ] [Infrastructure as code: running microservices on AWS using Docker, Terraform, and ECS][]
 - [ ] [Running Docker on AWS from the ground up][]
+- [ ] [Pushing to ECR Using Jenkins Pipeline Plugin][]
 - [ ] [Set Up a Jenkins Build Server on AWS][]
 - [ ] [Set up a build pipeline with Jenkins and Amazon ECS][]
 - [ ] [Automatically Deploy from GitHub Using AWS CodeDeploy][]
@@ -35,3 +36,4 @@
 [Learn Chef]:https://learn.chef.io/
 [Ansible Webminar y Training]:https://www.ansible.com/webinars-training
 [Docker Container as Build Slaves]:https://devopscube.com/docker-containers-as-build-slaves-jenkins/
+[Pushing to ECR Using Jenkins Pipeline Plugin]:https://blog.mikesir87.io/2016/04/pushing-to-ecr-using-jenkins-pipeline-plugin/

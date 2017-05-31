@@ -49,7 +49,9 @@ docker image pull ubuntu:12.04
 docker image pull ubuntu
 ```
 
-Dockerfile, building an image. Recommended: Crete a folder to host all the ncessary files (configuration), including your Dockerfile. Resources at `Dockerfiles/HelloWorld_NodeJS`
+Dockerfile, building an image. Recommended: Crete a folder to host all the necessary files (configuration), including your Dockerfile. Then build it within that folder (.).
+
+Resources at `Dockerfiles/HelloWorld_NodeJS`
 
 ```sh
 # v0.1 - Default Dockerfile - docker image build -t <REPO>:<TAG>
